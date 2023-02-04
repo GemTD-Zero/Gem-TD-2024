@@ -1,4 +1,5 @@
 ﻿using System;
+using _src.Grid.Models;
 using UnityEngine;
 
 namespace _src.Grid
@@ -6,25 +7,26 @@ namespace _src.Grid
     public class GridManagerMono : MonoBehaviour
     {
         [SerializeField]
-        private Data data;
+        private Data debugData;
 
         public GridCell[,] Cells { get; private set; }
 
-        private void Start()
-        {
-            var generator = new GridGenerator(data.width, data.height, data.cellSize);
-            Cells = generator.CreateCells();
-            generator.SpawnDebugObjects(data.debugPrefab, data.debugObjectsParent);
-        }
-
         private void OnValidate()
         {
-            if (data.debugObjectsParent == null)
+            if (debugData.debugObjectsParent == null)
             {
                 return;
             }
 
-            data.debugObjectsParent.gameObject.SetActive(data.showDebugObjects);
+            debugData.debugObjectsParent.gameObject.SetActive(debugData.showDebugObjects);
+        }
+
+
+        public void SpawnGrid(GridData data)
+        {
+            var generator = new GridGenerator(data);
+            Cells = generator.CreateCells();
+            generator.SpawnDebugObjects(debugData.debugPrefab, debugData.debugObjectsParent);
         }
 
         [Serializable]
@@ -33,11 +35,6 @@ namespace _src.Grid
             public Transform debugPrefab;
             public Transform debugObjectsParent;
             public bool showDebugObjects;
-
-            [Header("Values")]
-            public int width;
-            public int height;
-            public float cellSize;
         }
     }
 }

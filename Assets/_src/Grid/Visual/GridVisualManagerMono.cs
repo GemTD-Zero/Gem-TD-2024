@@ -1,4 +1,5 @@
 ﻿using System;
+using _src.Grid.Models;
 using UnityEngine;
 
 namespace _src.Grid.Visual
@@ -6,29 +7,25 @@ namespace _src.Grid.Visual
     public class GridVisualManagerMono : MonoBehaviour
     {
         [SerializeField]
-        private Data data;
+        private VisualData visualData;
 
         private CellVisualMono[,] visuals;
 
-        private void Start()
-        {
-            SpawnVisuals(10, 10, 2);
-        }
 
-        public void SpawnVisuals(int width, int height, float cellSize)
+        public void SpawnVisuals(GridData gridData)
         {
             if (visuals != null)
             {
                 throw new NotImplementedException($"{nameof(SpawnVisuals)} is called twice");
             }
 
-            visuals = new CellVisualMono[width, height];
+            visuals = new CellVisualMono[gridData.width, gridData.height];
 
-            for (var x = 0; x < width; x++)
+            for (var x = 0; x < gridData.width; x++)
             {
-                for (var z = 0; z < height; z++)
+                for (var z = 0; z < gridData.height; z++)
                 {
-                    SpawnVisual(x, z, cellSize);
+                    SpawnVisual(x, z, gridData.cellSize);
                 }
             }
         }
@@ -37,13 +34,12 @@ namespace _src.Grid.Visual
         {
             var cellPosition = new CellPosition(x, z);
             Vector3 worldPosition = cellPosition.ToWorldPosition(cellSize);
-            Transform visual = Instantiate(data.visualPrefab, worldPosition, Quaternion.identity);
-            visual.SetParent(data.visualsParent, false);
+            Transform visual = Instantiate(visualData.visualPrefab, worldPosition, Quaternion.identity);
+            visual.SetParent(visualData.visualsParent, false);
         }
 
-
         [Serializable]
-        public class Data
+        public class VisualData
         {
             public Transform visualPrefab;
             public Transform visualsParent;

@@ -1,4 +1,5 @@
 ﻿using _src.Grid.Debug;
+using _src.Grid.Models;
 using UnityEngine;
 
 namespace _src.Grid
@@ -6,23 +7,19 @@ namespace _src.Grid
     public class GridGenerator
     {
         private readonly GridCell[,] cells;
-        private readonly float cellSize;
-        private readonly int height;
-        private readonly int width;
+        private readonly GridData data;
 
-        public GridGenerator(int width, int height, float cellSize)
+        public GridGenerator(GridData data)
         {
-            this.width = width;
-            this.height = height;
-            this.cellSize = cellSize;
-            cells = new GridCell[width, height];
+            this.data = data;
+            cells = new GridCell[data.width, data.height];
         }
 
         public GridCell[,] CreateCells()
         {
-            for (var x = 0; x < width; x++)
+            for (var x = 0; x < data.width; x++)
             {
-                for (var z = 0; z < height; z++)
+                for (var z = 0; z < data.height; z++)
                 {
                     cells[x, z] = GenerateCell(x, z);
                 }
@@ -33,12 +30,12 @@ namespace _src.Grid
 
         public void SpawnDebugObjects(Transform prefab, Transform parent = null)
         {
-            for (var x = 0; x < width; x++)
+            for (var x = 0; x < data.width; x++)
             {
-                for (var z = 0; z < height; z++)
+                for (var z = 0; z < data.height; z++)
                 {
                     var position = new CellPosition(x, z);
-                    Transform debug = Object.Instantiate(prefab, position.ToWorldPosition(cellSize), Quaternion.identity);
+                    Transform debug = Object.Instantiate(prefab, position.ToWorldPosition(data.cellSize), Quaternion.identity);
                     debug.SetParent(parent, false);
                     var component = debug.GetComponent<GridDebugMono>();
                     component.SetGridCell(cells[x, z]);
