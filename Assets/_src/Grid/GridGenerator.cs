@@ -39,7 +39,7 @@ namespace _src.Grid
                 {
                     var position = new CellPosition(x, z);
                     Transform debug = Object.Instantiate(prefab, position.ToWorldPosition(cellSize), Quaternion.identity);
-                    debug.SetParent(parent);
+                    debug.SetParent(parent, false);
                     var component = debug.GetComponent<GridDebugMono>();
                     component.SetGridCell(cells[x, z]);
                 }
