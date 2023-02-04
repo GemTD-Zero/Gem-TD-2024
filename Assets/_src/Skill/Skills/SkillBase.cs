@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace _src.Skill
+namespace _src.Skill.Skills
 {
     public abstract class SkillBase
     {
