@@ -1,8 +1,7 @@
-using _src.Skill;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace _src.UI
+namespace _src.Skill.UI
 {
     public class TestUI : MonoBehaviour
     {
