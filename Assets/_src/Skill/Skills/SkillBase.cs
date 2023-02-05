@@ -18,4 +18,30 @@ namespace _src.Skill.Skills
         public virtual Sprite SkillSprite { get; }
         public abstract void Activate();
     }
+
+    public abstract class CooldownSkillBase : SkillBase
+    {
+        protected CooldownSkillBase(Texture2D texture, float cooldown) : base(texture, cooldown) { }
+
+        public override void Activate()
+        {
+            
+        }
+    }
+
+    public abstract class ClickAndSelectSkillBase : SkillBase
+    {
+        private bool isClicked;
+        
+        protected ClickAndSelectSkillBase(Texture2D texture, float cooldown) : base(texture, cooldown) { }
+
+        public override void Activate()
+        {
+            if (!isClicked)
+            {
+                isClicked = true;
+            }
+            //start dragging mouse to select cell
+        }
+    }
 }

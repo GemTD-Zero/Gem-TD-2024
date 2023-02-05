@@ -8,6 +8,8 @@
         }
 
         public CellPosition Position { get; }
+        
+        
 
         public override string ToString()
         {

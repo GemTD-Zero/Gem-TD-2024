@@ -2,7 +2,7 @@
 
 namespace _src.Grid.Visual
 {
-    public class CellVisualMono
+    public class CellVisualMono : MonoBehaviour
     {
         [SerializeField]
         private MeshRenderer visual;
