@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using _src.Grid;
+using UnityEngine;
 
 namespace _src.Player
 {
@@ -19,7 +20,7 @@ namespace _src.Player
             transform.position = GetMouseWorldPosition();
         }
 
-        private Vector3 GetMouseWorldPosition()
+        public Vector3 GetMouseWorldPosition()
         {
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
             Physics.Raycast(ray, out RaycastHit hit, float.MaxValue, mousePlaneLayerMask);

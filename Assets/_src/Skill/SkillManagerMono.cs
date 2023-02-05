@@ -9,12 +9,18 @@ namespace _src.Skill
         [SerializeField]
         private SkillButtonUI[] buttons;
 
+        private SkillBase[] skills;
+
         private void Start()
         {
-            var stoneAddSkill = new StoneAddSkill();
-            var stoneRemoveSkill = new StoneRemoveSkill();
-            buttons[0].Initialize(stoneAddSkill);
-            buttons[1].Initialize(stoneRemoveSkill);
+            // var stoneAddSkill = new PlaceTowerSkill();
+            // var stoneRemoveSkill = new StoneRemoveSkill();
+            // skills = new SkillBase[5];
+            // skills[0] = stoneAddSkill;
+            // skills[1] = stoneRemoveSkill;
+            //
+            // buttons[0].Initialize(stoneAddSkill);
+            // buttons[1].Initialize(stoneRemoveSkill);
         }
     }
 }
