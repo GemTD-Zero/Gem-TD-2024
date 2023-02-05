@@ -1,5 +1,5 @@
 ﻿using _src.Skill.Skills;
-using _src.Skill.UI;
+using _src.Skill.UI.Button;
 using UnityEngine;
 
 namespace _src.Skill
@@ -7,7 +7,7 @@ namespace _src.Skill
     public class SkillManagerMono : MonoBehaviour
     {
         [SerializeField]
-        private SkillButtonUI[] buttons;
+        private CooldownSkillButtonUI[] buttons;
 
         private SkillBase[] skills;
 

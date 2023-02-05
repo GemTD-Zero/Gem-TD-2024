@@ -4,9 +4,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace _src.Skill.UI
+namespace _src.Skill.UI.Button
 {
-    public class SkillButtonUI : MonoBehaviour
+    public class CooldownSkillButtonUI : MonoBehaviour
     {
         [SerializeField]
         private SkillData data;
@@ -80,7 +80,7 @@ namespace _src.Skill.UI
         [Serializable]
         public class SkillData
         {
-            public Button button;
+            public UnityEngine.UI.Button button;
             public Image cooldownImage;
             public TextMeshProUGUI cooldownText;
             public Image skillImage;
