@@ -9,33 +9,34 @@ namespace _src.Grid.Visual
         [SerializeField]
         private VisualData visualData;
 
-        private CellVisualMono[,] visuals;
-
+        public CellVisualMono[,] Visuals { get; private set; }
 
         public void SpawnVisuals(GridData gridData)
         {
-            if (visuals != null)
+            if (Visuals != null)
             {
                 throw new NotImplementedException($"{nameof(SpawnVisuals)} is called twice");
             }
 
-            visuals = new CellVisualMono[gridData.width, gridData.height];
+            Visuals = new CellVisualMono[gridData.width, gridData.height];
 
             for (var x = 0; x < gridData.width; x++)
             {
                 for (var z = 0; z < gridData.height; z++)
                 {
-                    SpawnVisual(x, z, gridData.cellSize);
+                    CellVisualMono visual = SpawnVisual(x, z, gridData.cellSize, visualData.visualPrefab);
+                    Visuals[x, z] = visual;
                 }
             }
         }
 
-        private void SpawnVisual(int x, int z, float cellSize)
+        private CellVisualMono SpawnVisual(int x, int z, float cellSize, Transform prefab)
         {
             var cellPosition = new CellPosition(x, z);
             Vector3 worldPosition = cellPosition.ToWorldPosition(cellSize);
-            Transform visual = Instantiate(visualData.visualPrefab, worldPosition, Quaternion.identity);
+            Transform visual = Instantiate(prefab, worldPosition, Quaternion.identity);
             visual.SetParent(visualData.visualsParent, false);
+            return visual.GetComponent<CellVisualMono>();
         }
 
         [Serializable]

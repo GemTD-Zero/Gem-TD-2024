@@ -5,16 +5,46 @@ namespace _src.Grid.Visual
     public class CellVisualMono : MonoBehaviour
     {
         [SerializeField]
-        private MeshRenderer visual;
+        private MeshRenderer mouseOverRenderer;
 
-        public void Show()
+        [SerializeField]
+        private MeshRenderer normalRenderer;
+
+        [SerializeField]
+        private MeshRenderer selectedRenderer;
+
+        private void Awake()
         {
-            visual.enabled = true;
+            ShowNormal();
+        }
+
+
+        public void ShowNormal()
+        {
+            normalRenderer.enabled = true;
+            selectedRenderer.enabled = false;
+            mouseOverRenderer.enabled = false;
+        }
+
+        public void ShowSelected()
+        {
+            normalRenderer.enabled = false;
+            selectedRenderer.enabled = true;
+            mouseOverRenderer.enabled = false;
+        }
+
+        public void ShowMouseOver()
+        {
+            normalRenderer.enabled = false;
+            selectedRenderer.enabled = false;
+            mouseOverRenderer.enabled = true;
         }
 
         public void Hide()
         {
-            visual.enabled = false;
+            normalRenderer.enabled = false;
+            selectedRenderer.enabled = false;
+            mouseOverRenderer.enabled = false;
         }
     }
 }

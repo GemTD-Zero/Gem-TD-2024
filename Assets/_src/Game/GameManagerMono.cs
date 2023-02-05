@@ -1,5 +1,5 @@
 ﻿using System;
-using _src.Grid;
+using _src.Grid.GridManager;
 using _src.Grid.Visual;
 using UnityEngine;
 

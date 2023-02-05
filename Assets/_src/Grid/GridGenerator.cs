@@ -1,4 +1,4 @@
-﻿using _src.Grid.Debug;
+﻿using _src.Grid.DebugThings;
 using _src.Grid.Models;
 using UnityEngine;
 

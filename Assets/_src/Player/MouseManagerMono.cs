@@ -1,5 +1,4 @@
-﻿using _src.Grid;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace _src.Player
 {
