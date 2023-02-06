@@ -1,5 +1,4 @@
-﻿using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace _src.Extensions
 {
@@ -14,6 +13,5 @@ namespace _src.Extensions
         {
             o.gameObject.SetActive(false);
         }
-        
     }
 }

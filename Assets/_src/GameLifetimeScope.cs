@@ -1,6 +1,6 @@
 ﻿using System;
 using _src.Game;
-using _src.Grid;
+using _src.Grid.GridManager;
 using _src.Player;
 using UnityEngine;
 using VContainer;
@@ -12,7 +12,7 @@ namespace _src
     {
         [SerializeField]
         private Monos monos;
-        
+
         protected override void Configure(IContainerBuilder builder)
         {
             builder.UseEntryPoints(Lifetime.Singleton, RegisterPresenters);
@@ -21,11 +21,11 @@ namespace _src
             RegisterMessagePipes(builder);
         }
 
-        private void RegisterMessagePipes(IContainerBuilder o) { }
+        private static void RegisterMessagePipes(IContainerBuilder o) { }
 
-        private void RegisterServices(IContainerBuilder o)
+        private static void RegisterServices(IContainerBuilder o)
         {
-            // o.Register<PlayerService>(Lifetime.Singleton);
+            o.Register<GridManagerService>(Lifetime.Singleton);
         }
 
         private void RegisterMonos(ComponentsBuilder o)
@@ -36,9 +36,9 @@ namespace _src
             o.AddInstance(monos.mouseManager);
         }
 
-        private void RegisterPresenters(EntryPointsBuilder o)
+        private static void RegisterPresenters(EntryPointsBuilder o)
         {
-            // o.Add<PlayerPresenter>();
+            o.Add<GridManagerPresenter>();
         }
 
         [Serializable]
