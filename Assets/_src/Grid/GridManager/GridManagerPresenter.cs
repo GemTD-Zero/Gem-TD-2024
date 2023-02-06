@@ -22,9 +22,20 @@ namespace _src.Grid.GridManager
 
         public void Tick()
         {
-            if (Input.GetMouseButtonDown(0) && !Helpers.IsMouseOverUI())
+            if (Helpers.IsMouseOverUI())
             {
-                service.OnClicked(mouseManagerMono.GetMouseWorldPosition());
+                return;
+            }
+
+            Vector3 mousePosition = mouseManagerMono.GetMouseWorldPosition();
+            
+            if (Input.GetMouseButtonDown(0))
+            {
+                service.OnClicked(mousePosition);
+            }
+            else
+            {
+                service.OnMouseOver(mousePosition);
             }
         }
     }

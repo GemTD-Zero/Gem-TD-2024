@@ -1,7 +1,6 @@
 ﻿using System;
 using _src.Game;
 using _src.Grid.GridManager;
-using _src.Grid.Visual;
 using _src.Player;
 using UnityEngine;
 using VContainer;
@@ -35,7 +34,6 @@ namespace _src
             o.AddInstance(monos.gameManager);
             o.AddInstance(monos.gridManager);
             o.AddInstance(monos.mouseManager);
-            o.AddInstance(monos.gridVisualManager);
         }
 
         private static void RegisterPresenters(EntryPointsBuilder o)
@@ -50,7 +48,6 @@ namespace _src
             public GridManagerMono gridManager;
             public MouseManagerMono mouseManager;
             public SharedDataMono sharedData;
-            public GridVisualManagerMono gridVisualManager;
         }
     }
 }

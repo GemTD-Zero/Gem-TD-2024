@@ -9,6 +9,12 @@ namespace _src.Grid.GridManager
         [SerializeField]
         private Data debugData;
 
+        [SerializeField]
+        private Transform gridVisualPrefab;
+
+        [SerializeField]
+        private Transform gridParent;
+
         public GridCell[,] Cells { get; private set; }
 
         private void OnValidate()
@@ -20,11 +26,10 @@ namespace _src.Grid.GridManager
 
             debugData.debugObjectsParent.gameObject.SetActive(debugData.showDebugObjects);
         }
-
-
+        
         public void SpawnGrid(GridData data)
         {
-            var generator = new GridGenerator(data);
+            var generator = new GridGenerator(data, gridVisualPrefab, gridParent);
             Cells = generator.CreateCells();
             generator.SpawnDebugObjects(debugData.debugPrefab, debugData.debugObjectsParent);
         }

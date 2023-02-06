@@ -1,5 +1,6 @@
 ﻿using _src.Grid.DebugThings;
 using _src.Grid.Models;
+using _src.Grid.Visual;
 using UnityEngine;
 
 namespace _src.Grid
@@ -8,10 +9,18 @@ namespace _src.Grid
     {
         private readonly GridCell[,] cells;
         private readonly GridData data;
+        private readonly Transform gridParent;
+        private readonly Transform gridVisualPrefab;
 
-        public GridGenerator(GridData data)
+
+        public GridGenerator(
+            GridData data,
+            Transform gridVisualPrefab,
+            Transform gridParent)
         {
             this.data = data;
+            this.gridVisualPrefab = gridVisualPrefab;
+            this.gridParent = gridParent;
             cells = new GridCell[data.width, data.height];
         }
 
@@ -21,14 +30,19 @@ namespace _src.Grid
             {
                 for (var z = 0; z < data.height; z++)
                 {
-                    cells[x, z] = GenerateCell(x, z);
+                    var position = new CellPosition(x, z);
+                    CellVisualMono visual = SpawnVisual(
+                        position.ToWorldPosition(data.cellSize),
+                        gridVisualPrefab,
+                        gridParent);
+                    cells[x, z] = new GridCell(position, visual, CellStatus.Normal);
                 }
             }
 
             return cells;
         }
 
-        public void SpawnDebugObjects(Transform prefab, Transform parent = null)
+        public void SpawnDebugObjects(Transform prefab, Transform parent)
         {
             for (var x = 0; x < data.width; x++)
             {
@@ -43,10 +57,11 @@ namespace _src.Grid
             }
         }
 
-        private static GridCell GenerateCell(int x, int z)
+        private CellVisualMono SpawnVisual(Vector3 worldPosition, Transform visualPrefab, Transform parent)
         {
-            var positoin = new CellPosition(x, z);
-            return new GridCell(positoin);
+            Transform visual = Object.Instantiate(visualPrefab, worldPosition, Quaternion.identity);
+            visual.SetParent(parent, false);
+            return visual.GetComponent<CellVisualMono>();
         }
     }
 }
