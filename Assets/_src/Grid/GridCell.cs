@@ -1,5 +1,4 @@
 ﻿using _src.Grid.Visual;
-using UnityEngine;
 
 namespace _src.Grid
 {

@@ -1,5 +1,6 @@
 ﻿using System;
 using _src.Grid.Models;
+using ObservableCollections;
 using UnityEngine;
 
 namespace _src.Grid.GridManager
@@ -14,6 +15,9 @@ namespace _src.Grid.GridManager
 
         [SerializeField]
         private Transform gridParent;
+ 
+        
+        public ObservableList<GridCell> selectedCells;
 
         public GridCell[,] Cells { get; private set; }
 

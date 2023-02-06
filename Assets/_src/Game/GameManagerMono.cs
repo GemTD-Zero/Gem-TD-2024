@@ -16,7 +16,7 @@ namespace _src.Game
 
         [Serializable]
         public class GameManagerData
-        { 
+        {
             public GridManagerMono gridManager;
             public SharedDataMono sharedData;
         }
