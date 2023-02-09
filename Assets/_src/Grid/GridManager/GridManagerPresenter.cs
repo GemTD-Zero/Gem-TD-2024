@@ -1,4 +1,3 @@
-using _src.Extensions;
 using _src.Player;
 using JetBrains.Annotations;
 using UnityEngine;
@@ -22,21 +21,13 @@ namespace _src.Grid.GridManager
 
         public void Tick()
         {
-            // if (Helpers.IsMouseOverUI())
-            // {
-            //     return;
-            // }
-            //
-            // Vector3 mousePosition = mouseManagerMono.GetMouseWorldPosition();
-            //
-            // if (Input.GetMouseButtonDown(0))
-            // {
-            //     service.OnClicked(mousePosition);
-            // }
-            // else
-            // {
-            //     service.OnMouseOver(mousePosition);
-            // }
+            Vector3 mouseWorldPosition = mouseManagerMono.GetMouseWorldPosition();
+            service.OnMouseOver(mouseWorldPosition);
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                service.OnClicked(mouseWorldPosition);
+            }
         }
     }
 }

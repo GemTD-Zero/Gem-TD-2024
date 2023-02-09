@@ -22,7 +22,10 @@ namespace _src
             RegisterMessagePipes(builder);
         }
 
-        private static void RegisterMessagePipes(IContainerBuilder o) { }
+        private static void RegisterMessagePipes(IContainerBuilder o)
+        {
+            
+        }
 
         private static void RegisterServices(IContainerBuilder o)
         {

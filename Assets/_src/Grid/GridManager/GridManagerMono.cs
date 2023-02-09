@@ -26,6 +26,7 @@ namespace _src.Grid.GridManager
 
             debugData.debugObjectsParent.gameObject.SetActive(debugData.showDebugObjects);
         }
+        
 
         public void HideAllVisuals()
         {

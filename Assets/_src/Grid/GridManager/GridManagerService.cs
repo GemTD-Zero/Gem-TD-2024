@@ -1,7 +1,7 @@
-﻿using _src.Extensions;
+﻿using System.Collections.Generic;
+using _src.Extensions;
 using _src.Grid.Models;
 using JetBrains.Annotations;
-using ObservableCollections;
 using UnityEngine;
 
 namespace _src.Grid.GridManager
@@ -12,6 +12,7 @@ namespace _src.Grid.GridManager
         private readonly GridManagerMono mono;
         private readonly SharedDataMono sharedData;
         private GridCell currentHoveredCell;
+        private readonly List<GridCell> selectedCells;
 
         public GridManagerService(
             GridManagerMono mono,
@@ -19,51 +20,52 @@ namespace _src.Grid.GridManager
         {
             this.mono = mono;
             this.sharedData = sharedData;
+            selectedCells = new List<GridCell>();
         }
         
-        // public void OnClicked(Vector3 mousePosition)
-        // {
-        //     (bool isInGrid, GridCell cell) = GetCell(mousePosition);
-        //
-        //     if (!isInGrid)
-        //     {
-        //         return;
-        //     }
-        //
-        //     if (cell.Status == CellStatus.Selected)
-        //     {
-        //         mono.selectedCells.Remove(cell);
-        //         cell.Unselect();
-        //     }
-        //     else if (cell.Status is CellStatus.MouseHover or CellStatus.Normal)
-        //     {
-        //         mono.selectedCells.Add(cell);
-        //         cell.Select();
-        //     }
-        // }
-        //
-        // public void OnMouseOver(Vector3 mousePosition)
-        // {
-        //     (bool isInGrid, GridCell newHoveredCell) = GetCell(mousePosition);
-        //
-        //     if (!isInGrid)
-        //     {
-        //         return;
-        //     }
-        //
-        //     if (newHoveredCell == currentHoveredCell)
-        //     {
-        //         return;
-        //     }
-        //
-        //     if (newHoveredCell.Status == CellStatus.Normal)
-        //     {
-        //         newHoveredCell.MouseHover();
-        //     }
-        //
-        //     UnselectCurrentHovered();
-        //     currentHoveredCell = newHoveredCell;
-        // }
+        public void OnClicked(Vector3 mousePosition)
+        {
+            (bool isInGrid, GridCell cell) = GetCell(mousePosition);
+        
+            if (!isInGrid)
+            {
+                return;
+            }
+        
+            if (cell.Status == CellStatus.Selected)
+            {
+                selectedCells.Remove(cell);
+                cell.Unselect();
+            }
+            else if (cell.Status is CellStatus.MouseHover or CellStatus.Normal)
+            {
+                selectedCells.Add(cell);
+                cell.Select();
+            }
+        }
+        
+        public void OnMouseOver(Vector3 mousePosition)
+        {
+            (bool isInGrid, GridCell newHoveredCell) = GetCell(mousePosition);
+        
+            if (!isInGrid)
+            {
+                return;
+            }
+        
+            if (newHoveredCell == currentHoveredCell)
+            {
+                return;
+            }
+        
+            if (newHoveredCell.Status == CellStatus.Normal)
+            {
+                newHoveredCell.MouseHover();
+            }
+        
+            UnselectCurrentHovered();
+            currentHoveredCell = newHoveredCell;
+        }
 
         private void UnselectCurrentHovered()
         {
