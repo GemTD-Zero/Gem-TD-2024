@@ -72,12 +72,14 @@ namespace _src.Towers.TowerPlacement
             Debug.Log(
                 "Tower.Place.Cancel\n"
               + $"Total Stone Count:{placedTowers.Count}");
+            //TODO cancel tower placing
         }
 
         private void OnTowerPlaceSuccess(GridPosition position)
         {
             //TODO check if cell has tower when howering, not placing it
-            if (gridManager.Cells[position.X, position.Z].Tower != null)
+            GridCell gridCell = gridManager.Cells[position.X, position.Z];
+            if (gridCell.Tower != null)
             {
                 return;
             }
@@ -91,7 +93,8 @@ namespace _src.Towers.TowerPlacement
             Vector3 worldPosition = position.ToWorldPosition(sharedData.grid.cellSize);
             Transform spawn = Object.Instantiate(prefab, worldPosition, Quaternion.identity);
             var tower = spawn.GetComponent<TowerMono>();
-            gridManager.Cells[position.X, position.Z].Tower = tower;
+            gridCell.Tower = tower;
+            gridCell.Hide();
             placedTowers.Add(tower);
             
             if (placedTowers.Count == 5)
