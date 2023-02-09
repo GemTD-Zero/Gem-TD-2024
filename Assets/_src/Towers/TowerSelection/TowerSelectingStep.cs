@@ -1,28 +1,26 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using _src.Game.TurnCycle.TurnSteps;
 using _src.Grid.GridManager;
 using _src.Grid.Models;
 using _src.Towers.Stone;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace _src.Towers.TowerSelection
 {
     public class TowerSelectingStep : BaseStep
     {
         private readonly GridManagerMono gridManager;
-        private readonly SharedDataMono sharedData;
-        private readonly TowerSelectionMono towerSelection;
+        private readonly Transform stonePrefab;
         private List<TowerMono> towers;
 
-        public TowerSelectingStep(
-            GridManagerMono gridManager,
-            SharedDataMono sharedData,
-            TowerSelectionMono towerSelection)
+        public TowerSelectingStep(GridManagerMono gridManager, Transform stonePrefab)
         {
             this.gridManager = gridManager;
-            this.sharedData = sharedData;
-            this.towerSelection = towerSelection;
+            this.stonePrefab = stonePrefab;
         }
 
         public override void OnEnter(object param)
@@ -48,7 +46,7 @@ namespace _src.Towers.TowerSelection
                 tower.Cell.Unselect();
             }
         }
-
+\
         public override void OnExit()
         {
             MethodBase method = MethodBase.GetCurrentMethod();
@@ -56,9 +54,15 @@ namespace _src.Towers.TowerSelection
             Debug.Log($"{className}.{method.Name}");
         }
 
-        private void SelectedCellsChangedEvent(IReadOnlyCollection<GridCell> obj)
+        private void SelectedCellsChangedEvent(IReadOnlyCollection<GridCell> cells)
         {
-            Debug.Log($"Collection Changed:{obj.Count}");
+            if (cells.Count != 1)
+            {
+                throw new Exception($"Selected Cells Count is Wrong is {cells.Count}");
+            }
+
+            GridCell selectedCell = cells.First();
+            
         }
     }
 }

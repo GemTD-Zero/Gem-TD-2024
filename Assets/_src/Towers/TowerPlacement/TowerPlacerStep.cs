@@ -90,7 +90,7 @@ namespace _src.Towers.TowerPlacement
               + $"Position:{position.ToString()}\n"
               + $"Total Stone Count:{placedTowers}");
             
-            Transform prefab = RandomTowerGenerator.NextRandomTowerPrefab();
+            Transform prefab = TowerGenerator.NextRandomTowerPrefab();
             Vector3 worldPosition = position.ToWorldPosition(sharedData.grid.cellSize);
             Transform spawn = Object.Instantiate(prefab, worldPosition, Quaternion.identity);
             var tower = spawn.GetComponent<TowerMono>();
