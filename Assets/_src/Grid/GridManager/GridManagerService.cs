@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using _src.Extensions;
+﻿using _src.Extensions;
 using _src.Grid.Models;
 using JetBrains.Annotations;
+using ObservableCollections;
 using UnityEngine;
 
 namespace _src.Grid.GridManager
@@ -10,9 +10,9 @@ namespace _src.Grid.GridManager
     public class GridManagerService
     {
         private readonly GridManagerMono mono;
+        private readonly ObservableList<GridCell> selectedCells;
         private readonly SharedDataMono sharedData;
         private GridCell currentHoveredCell;
-        private readonly List<GridCell> selectedCells;
 
         public GridManagerService(
             GridManagerMono mono,
@@ -20,18 +20,22 @@ namespace _src.Grid.GridManager
         {
             this.mono = mono;
             this.sharedData = sharedData;
-            selectedCells = new List<GridCell>();
+            selectedCells = new ObservableList<GridCell>();
+            selectedCells.CollectionChanged += delegate
+            {
+                mono.SelectedCellsChangedEvent.Invoke(selectedCells);
+            };
         }
-        
+
         public void OnClicked(Vector3 mousePosition)
         {
             (bool isInGrid, GridCell cell) = GetCell(mousePosition);
-        
+
             if (!isInGrid)
             {
                 return;
             }
-        
+
             if (cell.Status == CellStatus.Selected)
             {
                 selectedCells.Remove(cell);
@@ -43,26 +47,26 @@ namespace _src.Grid.GridManager
                 cell.Select();
             }
         }
-        
+
         public void OnMouseOver(Vector3 mousePosition)
         {
             (bool isInGrid, GridCell newHoveredCell) = GetCell(mousePosition);
-        
+
             if (!isInGrid)
             {
                 return;
             }
-        
+
             if (newHoveredCell == currentHoveredCell)
             {
                 return;
             }
-        
+
             if (newHoveredCell.Status == CellStatus.Normal)
             {
                 newHoveredCell.MouseHover();
             }
-        
+
             UnselectCurrentHovered();
             currentHoveredCell = newHoveredCell;
         }

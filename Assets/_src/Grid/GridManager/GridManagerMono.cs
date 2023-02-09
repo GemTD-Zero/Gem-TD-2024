@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using _src.Grid.Models;
 using UnityEngine;
 
@@ -16,6 +17,8 @@ namespace _src.Grid.GridManager
         private Transform gridParent;
         
         public GridCell[,] Cells { get; private set; }
+        
+        public Action<IReadOnlyCollection<GridCell>> SelectedCellsChangedEvent { get; set; }
 
         private void OnValidate()
         {

@@ -2,6 +2,7 @@
 using System.Reflection;
 using _src.Game.TurnCycle.TurnSteps;
 using _src.Grid.GridManager;
+using _src.Grid.Models;
 using _src.Towers.Stone;
 using UnityEngine;
 
@@ -29,7 +30,7 @@ namespace _src.Towers.TowerSelection
             if (param is List<TowerMono> { Count: 5 } items)
             {
                 towers = items;
-                //towerSelection.Activate.Invoke(this);
+                gridManager.SelectedCellsChangedEvent += SelectedCellsChangedEvent;
             }
             else
             {
@@ -53,6 +54,11 @@ namespace _src.Towers.TowerSelection
             MethodBase method = MethodBase.GetCurrentMethod();
             string className = method.DeclaringType.Name;
             Debug.Log($"{className}.{method.Name}");
+        }
+
+        private void SelectedCellsChangedEvent(IReadOnlyCollection<GridCell> obj)
+        {
+            Debug.Log($"Collection Changed:{obj.Count}");
         }
     }
 }
