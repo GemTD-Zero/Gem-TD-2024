@@ -76,7 +76,7 @@ namespace _src.Grid.GridManager
 
         private (bool isInGrid, GridCell cell) GetCell(Vector3 worldPosition)
         {
-            (bool isInGrid, CellPosition position) = worldPosition.ToGridPosition(sharedData.grid);
+            (bool isInGrid, GridPosition position) = worldPosition.ToGridPosition(sharedData.grid);
 
             if (!isInGrid)
             {

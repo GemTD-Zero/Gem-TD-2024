@@ -22,21 +22,21 @@ namespace _src.Grid.GridManager
 
         public void Tick()
         {
-            if (Helpers.IsMouseOverUI())
-            {
-                return;
-            }
-
-            Vector3 mousePosition = mouseManagerMono.GetMouseWorldPosition();
-            
-            if (Input.GetMouseButtonDown(0))
-            {
-                service.OnClicked(mousePosition);
-            }
-            else
-            {
-                service.OnMouseOver(mousePosition);
-            }
+            // if (Helpers.IsMouseOverUI())
+            // {
+            //     return;
+            // }
+            //
+            // Vector3 mousePosition = mouseManagerMono.GetMouseWorldPosition();
+            //
+            // if (Input.GetMouseButtonDown(0))
+            // {
+            //     service.OnClicked(mousePosition);
+            // }
+            // else
+            // {
+            //     service.OnMouseOver(mousePosition);
+            // }
         }
     }
 }

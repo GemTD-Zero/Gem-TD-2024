@@ -2,9 +2,9 @@
 
 namespace _src.Grid
 {
-    public readonly struct CellPosition : IEquatable<CellPosition>
+    public readonly struct GridPosition : IEquatable<GridPosition>
     {
-        public CellPosition(int x, int z)
+        public GridPosition(int x, int z)
         {
             X = x;
             Z = z;
@@ -14,14 +14,14 @@ namespace _src.Grid
 
         public int Z { get; }
 
-        public bool Equals(CellPosition other)
+        public bool Equals(GridPosition other)
         {
             return X == other.X && Z == other.Z;
         }
 
         public override bool Equals(object o)
         {
-            if (o is not CellPosition other)
+            if (o is not GridPosition other)
             {
                 return false;
             }
@@ -39,24 +39,24 @@ namespace _src.Grid
             return $"{nameof(X)}:{X} {nameof(Z)}:{Z}";
         }
 
-        public static bool operator ==(CellPosition a, CellPosition b)
+        public static bool operator ==(GridPosition a, GridPosition b)
         {
             return a.Equals(b);
         }
 
-        public static bool operator !=(CellPosition a, CellPosition b)
+        public static bool operator !=(GridPosition a, GridPosition b)
         {
             return !a.Equals(b);
         }
 
-        public static CellPosition operator +(CellPosition a, CellPosition b)
+        public static GridPosition operator +(GridPosition a, GridPosition b)
         {
-            return new CellPosition(a.X + b.X, a.Z + b.Z);
+            return new GridPosition(a.X + b.X, a.Z + b.Z);
         }
 
-        public static CellPosition operator -(CellPosition a, CellPosition b)
+        public static GridPosition operator -(GridPosition a, GridPosition b)
         {
-            return new CellPosition(a.X - b.X, a.Z - b.Z);
+            return new GridPosition(a.X - b.X, a.Z - b.Z);
         }
     }
 }

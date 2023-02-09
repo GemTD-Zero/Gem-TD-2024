@@ -4,7 +4,7 @@ namespace _src.Towers
 {
     public static class RandomTowerGenerator
     {
-        public static Transform RandomTower()
+        public static Transform NextRandomTowerPrefab()
         {
             var gameObject = Resources.Load<Transform>("Towers/Sample Tower Prefab");
             return gameObject;

@@ -9,9 +9,24 @@ namespace _src.Extensions
             o.gameObject.SetActive(true);
         }
 
-        public static void SetDisabled(this MonoBehaviour o)
+        public static void SetDeactivated(this MonoBehaviour o)
         {
             o.gameObject.SetActive(false);
+        }
+        
+        public static void SetActivated(this Transform o)
+        {
+            o.gameObject.SetActive(true);
+        }
+
+        public static void SetDeactivated(this Transform o)
+        {
+            o.gameObject.SetActive(false);
+        }
+
+        public static bool IsActivated(this Transform o)
+        {
+            return o.gameObject.activeSelf;
         }
     }
 }

@@ -11,22 +11,14 @@ namespace _src.Skill.UI.Button
     {
         [SerializeField]
         private UiControlsData ui;
-
-        private float coolDown;
-        private CooldownWaiter waiter;
-
-        private void SetCooldown(float cooldownInMilliseconds)
-        {
-            coolDown = cooldownInMilliseconds;
-        }
-
+        
         public void SetSkillImage(Texture2D texture)
         {
             var rectangle = new Rect(0.0f, 0.0f, texture.width, texture.height);
             var pivot = new Vector2(0.5f, 0.5f);
             const float pixelsPerUnit = 100.0f;
             var sprite = Sprite.Create(texture, rectangle, pivot, pixelsPerUnit);
-            ui.skillImage.sprite = sprite;
+            ui.skillImage.sprite = sprite; 
         }
 
         public void AddButtonListener(UnityAction onButtonClick)
@@ -37,14 +29,14 @@ namespace _src.Skill.UI.Button
         public void Activate()
         {
             ui.button.interactable = true;
-            ui.cooldownText.SetDisabled();
-            ui.cooldownImage.SetDisabled();
+            ui.cooldownText.SetDeactivated();
+            ui.cooldownImage.SetDeactivated();
         }
 
         public void Disable()
         {
             ui.button.interactable = false;
-            ui.cooldownText.SetDisabled();
+            ui.cooldownText.SetDeactivated();
             ui.cooldownImage.SetActivated();
         }
 

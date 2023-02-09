@@ -30,7 +30,7 @@ namespace _src.Grid
             {
                 for (var z = 0; z < data.height; z++)
                 {
-                    var position = new CellPosition(x, z);
+                    var position = new GridPosition(x, z);
                     CellVisualMono visual = SpawnVisual(
                         position.ToWorldPosition(data.cellSize),
                         gridVisualPrefab,
@@ -48,7 +48,7 @@ namespace _src.Grid
             {
                 for (var z = 0; z < data.height; z++)
                 {
-                    var position = new CellPosition(x, z);
+                    var position = new GridPosition(x, z);
                     Transform debug = Object.Instantiate(prefab, position.ToWorldPosition(data.cellSize), Quaternion.identity);
                     debug.SetParent(parent, false);
                     var component = debug.GetComponent<GridDebugMono>();

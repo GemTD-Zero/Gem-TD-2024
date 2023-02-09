@@ -254,7 +254,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7788649533651470907}
-  - component: {fileID: 7788649533651470908}
+  - component: {fileID: 6406948145344614448}
   m_Layer: 5
   m_Name: Holder - Skill
   m_TagString: Untagged
@@ -285,7 +285,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &7788649533651470908
+--- !u!114 &6406948145344614448
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -294,13 +294,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 7788649533651470906}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b067c85256a5a544ba7f476bf31273a, type: 3}
+  m_Script: {fileID: 11500000, guid: c576fb291f134a6f807ea8e860e9f91a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data:
-    button: {fileID: 7788649533415081631}
+  ui:
     cooldownImage: {fileID: 7788649533780523568}
     cooldownText: {fileID: 7788649534163928562}
+    button: {fileID: 7788649533415081631}
     skillImage: {fileID: 1059266717802387083}
 --- !u!1 &7788649533780523582
 GameObject:

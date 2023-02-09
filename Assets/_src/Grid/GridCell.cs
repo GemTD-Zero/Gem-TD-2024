@@ -1,4 +1,6 @@
 ﻿using _src.Grid.Visual;
+using _src.Towers;
+using _src.Towers.Stone;
 
 namespace _src.Grid
 {
@@ -14,7 +16,7 @@ namespace _src.Grid
     {
         private readonly CellVisualMono visual;
 
-        public GridCell(CellPosition position, CellVisualMono visual, CellStatus status)
+        public GridCell(GridPosition position, CellVisualMono visual, CellStatus status)
         {
             Position = position;
             this.visual = visual;
@@ -23,7 +25,9 @@ namespace _src.Grid
 
         public CellStatus Status { get; private set; }
 
-        public CellPosition Position { get; }
+        public GridPosition Position { get; }
+
+        public TowerMono Tower { get; set; }
 
         public void Select()
         {
