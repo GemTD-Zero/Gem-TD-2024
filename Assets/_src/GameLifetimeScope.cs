@@ -2,6 +2,7 @@
 using _src.Game;
 using _src.Grid.GridManager;
 using _src.Player;
+using _src.Towers.TowerSelection;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -26,6 +27,7 @@ namespace _src
         private static void RegisterServices(IContainerBuilder o)
         {
             o.Register<GridManagerService>(Lifetime.Singleton);
+            o.Register<TowerSelectionService>(Lifetime.Singleton);
         }
 
         private void RegisterMonos(ComponentsBuilder o)
@@ -34,11 +36,13 @@ namespace _src
             o.AddInstance(monos.gameManager);
             o.AddInstance(monos.gridManager);
             o.AddInstance(monos.mouseManager);
+            o.AddInstance(monos.towerSelection);
         }
 
         private static void RegisterPresenters(EntryPointsBuilder o)
         {
             o.Add<GridManagerPresenter>();
+            o.Add<TowerSelectionPresenter>();
         }
 
         [Serializable]
@@ -48,6 +52,7 @@ namespace _src
             public GridManagerMono gridManager;
             public MouseManagerMono mouseManager;
             public SharedDataMono sharedData;
+            public TowerSelectionMono towerSelection;
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using _src.Grid.Models;
-using ObservableCollections;
 using UnityEngine;
 
 namespace _src.Grid.GridManager
@@ -15,10 +14,7 @@ namespace _src.Grid.GridManager
 
         [SerializeField]
         private Transform gridParent;
- 
         
-        public ObservableList<GridCell> selectedCells;
-
         public GridCell[,] Cells { get; private set; }
 
         private void OnValidate()
@@ -29,6 +25,14 @@ namespace _src.Grid.GridManager
             }
 
             debugData.debugObjectsParent.gameObject.SetActive(debugData.showDebugObjects);
+        }
+
+        public void HideAllVisuals()
+        {
+            foreach (GridCell cell in Cells)
+            {
+                cell.Hide();
+            }
         }
         
         public void SpawnGrid(GridData data)

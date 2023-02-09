@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using _src.Extensions;
 using _src.Game.TurnCycle.TurnSteps;
-using _src.Grid;
 using _src.Grid.GridManager;
+using _src.Grid.Models;
 using _src.Skill.UI.Button;
 using _src.Towers.Stone;
 using UnityEngine;
@@ -93,6 +94,7 @@ namespace _src.Towers.TowerPlacement
             Vector3 worldPosition = position.ToWorldPosition(sharedData.grid.cellSize);
             Transform spawn = Object.Instantiate(prefab, worldPosition, Quaternion.identity);
             var tower = spawn.GetComponent<TowerMono>();
+            tower.Cell = gridCell;
             gridCell.Tower = tower;
             gridCell.Hide();
             placedTowers.Add(tower);

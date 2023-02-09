@@ -1,8 +1,7 @@
 ﻿using _src.Grid.Visual;
-using _src.Towers;
 using _src.Towers.Stone;
 
-namespace _src.Grid
+namespace _src.Grid.Models
 {
     public enum CellStatus
     {

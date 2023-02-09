@@ -1,6 +1,7 @@
 ﻿using System;
 using _src.Extensions;
 using _src.Grid;
+using _src.Grid.Models;
 using _src.Player;
 using UnityEngine;
 
@@ -17,9 +18,10 @@ namespace _src.Towers.TowerPlacement
         [SerializeField]
         private SharedDataMono sharedData;
 
-        private bool shouldHowerOver;
-        private Transform howerObject;
         private GridPosition currentPosition;
+        private Transform howerObject;
+
+        private bool shouldHowerOver;
         private Action towerPlaceCancel;
         private Action<GridPosition> towerPlaceSuccess;
 
@@ -36,7 +38,12 @@ namespace _src.Towers.TowerPlacement
                 return;
             }
 
-            MoveObjectToMouseGridPosition();
+            (bool isIngrid, GridPosition position) = MouseHowerer.MoveObjectToMousePosition(mouseManager, sharedData, howerObject);
+            if (isIngrid)
+            {
+                currentPosition = position;
+            }
+
 
             if (Input.GetMouseButtonDown(0))
             {
@@ -52,21 +59,6 @@ namespace _src.Towers.TowerPlacement
             }
         }
 
-        private void MoveObjectToMouseGridPosition()
-        {
-            Vector3 worldPosition = mouseManager.GetMouseWorldPosition();
-            (bool isInGrid, GridPosition gridPosition) = worldPosition.ToGridPosition(sharedData.grid);
-
-            if (!isInGrid)
-            {
-                howerObject.SetDeactivated();
-                return;
-            }
-
-            currentPosition = gridPosition;
-            howerObject.SetActivated();
-            howerObject.transform.position = gridPosition.ToWorldPosition(sharedData.grid.cellSize);
-        }
 
         public Action EnableTowerHower(Action<GridPosition> onTowerPlaceSuccess, Action onTowerPlaceCancel)
         {

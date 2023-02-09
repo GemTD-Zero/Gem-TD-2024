@@ -1,7 +1,7 @@
 ﻿using _src.Grid.Models;
 using UnityEngine;
 
-namespace _src.Grid
+namespace _src.Extensions
 {
     public static class GridExtensions
     {
@@ -16,9 +16,7 @@ namespace _src.Grid
             int z = Mathf.RoundToInt(worldPosition.z / data.cellSize);
 
             var position = new GridPosition(x, z);
-
             bool isInGrid = IsInGrid(data, x, z);
-
             return (isInGrid, position);
         }
 
