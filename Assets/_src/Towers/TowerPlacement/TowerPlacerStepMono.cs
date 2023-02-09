@@ -11,7 +11,7 @@ using Object = UnityEngine.Object;
 
 namespace _src.Towers.TowerPlacement
 {
-    public class TowerPlacerStep : BaseStep
+    public class TowerPlacerStepMono : BaseStepMono
     {
         private readonly TowerPlacerMono towerPlacer;
         private readonly SkillButtonUI skill;
@@ -21,7 +21,7 @@ namespace _src.Towers.TowerPlacement
         private Action cancelPlacing;
         private List<TowerMono> placedTowers;
 
-        public TowerPlacerStep(
+        public TowerPlacerStepMono(
             TowerPlacerMono towerPlacer, 
             SkillButtonUI skill,
             GridManagerMono gridManager,

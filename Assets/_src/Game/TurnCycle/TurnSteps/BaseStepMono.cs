@@ -1,21 +1,21 @@
 ﻿namespace _src.Game.TurnCycle.TurnSteps
 {
-    public abstract class BaseStep
+    public abstract class BaseStepMono
     {
-        private BaseStep nextStep;
+        private BaseStepMono nextStepMono;
 
         public abstract void OnEnter(object param = null);
         public abstract void OnExit();
 
-        public void SetNext(BaseStep step)
+        public void SetNext(BaseStepMono stepMono)
         {
-            nextStep = step;
+            nextStepMono = stepMono;
         }
 
         internal void Exit(object param = null)
         {
             OnExit();
-            nextStep?.OnEnter(param);
+            nextStepMono?.OnEnter(param);
         }
     }
 }

@@ -6,8 +6,10 @@ using UnityEngine;
 
 namespace _src.Towers.TowerSelection
 {
-    public class TowerSelectingStep : BaseStep
+    public class TowerSelectingStepMono : BaseStepMono
     {
+        
+        
         public override void OnEnter(object param)
         {
             if (param is List<TowerMono> towers)
