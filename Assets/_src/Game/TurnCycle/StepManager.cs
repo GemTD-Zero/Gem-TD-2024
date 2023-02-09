@@ -14,17 +14,17 @@ namespace _src.Game.TurnCycle
         public GridManagerMono gridManager;
         public SharedDataMono sharedData;
 
-        private BaseStepMono currentNode;
+        private BaseStep currentNode;
 
         private void Awake()
         {
-            var stonePlacing = new TowerPlacerStepMono(
+            var stonePlacing = new TowerPlacerStep(
                 towerPlacer,
                 skillBarManager.skillBar.firstSkill,
                 gridManager,
                 sharedData);
-            var stoneSelectingStep = new TowerSelectingStepMono();
-            var spawnStep = new SpawnStepMono();
+            var stoneSelectingStep = new TowerSelectingStep();
+            var spawnStep = new SpawnStep();
 
             stonePlacing.SetNext(stoneSelectingStep);
             stoneSelectingStep.SetNext(spawnStep);

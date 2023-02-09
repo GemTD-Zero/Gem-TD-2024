@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace _src.Game.TurnCycle.TurnSteps
 {
-    public class SpawnStepMono : BaseStepMono
+    public class SpawnStep : BaseStep
     {
         public override void OnEnter(object param = null)
         {
