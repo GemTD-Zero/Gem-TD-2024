@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Reflection;
 using _src.Game.TurnCycle.TurnSteps;
 using _src.Grid;
@@ -17,8 +18,8 @@ namespace _src.Towers.TowerPlacement
         private readonly GridManagerMono gridManager;
         private readonly SharedDataMono sharedData;
         private bool isPressed;
-        private int leftTowerPlaceCount;
         private Action cancelPlacing;
+        private List<TowerMono> placedTowers;
 
         public TowerPlacerStep(
             TowerPlacerMono towerPlacer, 
@@ -33,11 +34,12 @@ namespace _src.Towers.TowerPlacement
             this.skill.SetSkillImage(ResourcesHelper.Skills.TowerPlacerImage);
             skill.Activate();
             skill.AddButtonListener(OnButtonClick);
+            placedTowers = new List<TowerMono>(5);
         }
 
-        public override void OnEnter()
+        public override void OnEnter(object param = null)
         {
-            leftTowerPlaceCount = 5;
+            placedTowers.Clear();
             MethodBase method = MethodBase.GetCurrentMethod();
             string className = method.DeclaringType.Name;
             Debug.Log($"{className}.{method.Name}");
@@ -56,7 +58,6 @@ namespace _src.Towers.TowerPlacement
             {
                 //skill.Disable();
                 isPressed = true;
-                
                 cancelPlacing = towerPlacer.EnableTowerHower(OnTowerPlaceSuccess, OnTowerPlaceCancel);
             }
             else
@@ -70,7 +71,7 @@ namespace _src.Towers.TowerPlacement
         {
             Debug.Log(
                 "Tower.Place.Cancel\n"
-              + $"Left Stone Count:{leftTowerPlaceCount}");
+              + $"Total Stone Count:{placedTowers.Count}");
         }
 
         private void OnTowerPlaceSuccess(GridPosition position)
@@ -81,23 +82,22 @@ namespace _src.Towers.TowerPlacement
                 return;
             }
             
-            leftTowerPlaceCount--;
             Debug.Log(
                 "Tower.Place.Success\n"
               + $"Position:{position.ToString()}\n"
-              + $"Left Stone Count:{leftTowerPlaceCount}");
+              + $"Total Stone Count:{placedTowers}");
+            
             Transform prefab = RandomTowerGenerator.NextRandomTowerPrefab();
             Vector3 worldPosition = position.ToWorldPosition(sharedData.grid.cellSize);
-            Transform obj = Object.Instantiate(prefab, worldPosition, Quaternion.identity);
-
-            gridManager.Cells[position.X, position.Z].Tower = obj.GetComponent<TowerMono>();
+            Transform spawn = Object.Instantiate(prefab, worldPosition, Quaternion.identity);
+            var tower = spawn.GetComponent<TowerMono>();
+            gridManager.Cells[position.X, position.Z].Tower = tower;
+            placedTowers.Add(tower);
             
-            
-
-            if (leftTowerPlaceCount < 0)
+            if (placedTowers.Count == 5)
             {
                 cancelPlacing.Invoke();
-                Exit();
+                Exit(placedTowers);
             }
         }
     }

@@ -5,7 +5,7 @@ namespace _src.Game.TurnCycle.TurnSteps
 {
     public class SpawnStep : BaseStep
     {
-        public override void OnEnter()
+        public override void OnEnter(object param = null)
         {
             MethodBase method = MethodBase.GetCurrentMethod();
             string className = method.DeclaringType.Name;
