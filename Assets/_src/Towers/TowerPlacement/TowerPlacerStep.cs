@@ -6,7 +6,6 @@ using _src.Game.TurnCycle.TurnSteps;
 using _src.Grid.GridManager;
 using _src.Grid.Models;
 using _src.Skill.UI.Button;
-using _src.Towers.Stone;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -20,7 +19,7 @@ namespace _src.Towers.TowerPlacement
         private readonly SharedDataMono sharedData;
         private bool isPressed;
         private Action cancelPlacing;
-        private List<TowerMono> placedTowers;
+        private List<GridCell> towerPlacedGridCells;
 
         public TowerPlacerStep(
             TowerPlacerMono towerPlacer, 
@@ -35,22 +34,16 @@ namespace _src.Towers.TowerPlacement
             this.skill.SetSkillImage(ResourcesHelper.Skills.TowerPlacerImage);
             skill.Activate();
             skill.AddButtonListener(OnButtonClick);
-            placedTowers = new List<TowerMono>(5);
+            towerPlacedGridCells = new List<GridCell>(5);
         }
 
         public override void OnEnter(object param = null)
         {
-            placedTowers.Clear();
-            MethodBase method = MethodBase.GetCurrentMethod();
-            string className = method.DeclaringType.Name;
-            Debug.Log($"{className}.{method.Name}");
+            towerPlacedGridCells.Clear();
         }
 
         public override void OnExit()
         {
-            MethodBase method = MethodBase.GetCurrentMethod();
-            string className = method.DeclaringType.Name;
-            Debug.Log($"{className}.{method.Name}");
         }
 
         private void OnButtonClick()
@@ -72,7 +65,7 @@ namespace _src.Towers.TowerPlacement
         {
             Debug.Log(
                 "Tower.Place.Cancel\n"
-              + $"Total Stone Count:{placedTowers.Count}");
+              + $"Total Stone Count:{towerPlacedGridCells.Count}");
             //TODO cancel tower placing
         }
 
@@ -88,21 +81,20 @@ namespace _src.Towers.TowerPlacement
             Debug.Log(
                 "Tower.Place.Success\n"
               + $"Position:{position.ToString()}\n"
-              + $"Total Stone Count:{placedTowers}");
+              + $"Total Stone Count:{towerPlacedGridCells}");
             
             Transform prefab = TowerGenerator.NextRandomTowerPrefab();
             Vector3 worldPosition = position.ToWorldPosition(sharedData.grid.cellSize);
             Transform spawn = Object.Instantiate(prefab, worldPosition, Quaternion.identity);
             var tower = spawn.GetComponent<TowerMono>();
-            tower.Cell = gridCell;
             gridCell.Tower = tower;
             gridCell.Hide();
-            placedTowers.Add(tower);
+            towerPlacedGridCells.Add(gridCell);
             
-            if (placedTowers.Count == 5)
+            if (towerPlacedGridCells.Count == 5)
             {
                 cancelPlacing.Invoke();
-                Exit(placedTowers);
+                Exit(towerPlacedGridCells);
             }
         }
     }

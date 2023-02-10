@@ -1,6 +1,5 @@
 ﻿using System;
 using _src.Extensions;
-using _src.Grid;
 using _src.Grid.Models;
 using _src.Player;
 using UnityEngine;

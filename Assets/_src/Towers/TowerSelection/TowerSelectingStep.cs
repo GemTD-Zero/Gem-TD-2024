@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using _src.Extensions;
 using _src.Game.TurnCycle.TurnSteps;
 using _src.Grid.GridManager;
 using _src.Grid.Models;
-using _src.Towers.Stone;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -14,20 +14,25 @@ namespace _src.Towers.TowerSelection
     public class TowerSelectingStep : BaseStep
     {
         private readonly GridManagerMono gridManager;
+        private readonly SharedDataMono sharedData;
         private readonly Transform stonePrefab;
-        private List<TowerMono> towers;
+        private List<GridCell> gridCells;
 
-        public TowerSelectingStep(GridManagerMono gridManager, Transform stonePrefab)
+        public TowerSelectingStep(
+            GridManagerMono gridManager,
+            Transform stonePrefab,
+            SharedDataMono sharedData)
         {
             this.gridManager = gridManager;
             this.stonePrefab = stonePrefab;
+            this.sharedData = sharedData;
         }
 
         public override void OnEnter(object param)
         {
-            if (param is List<TowerMono> { Count: 5 } items)
+            if (param is List<GridCell> { Count: 5 } items)
             {
-                towers = items;
+                gridCells = items;
                 gridManager.SelectedCellsChangedEvent += SelectedCellsChangedEvent;
             }
             else
@@ -35,23 +40,17 @@ namespace _src.Towers.TowerSelection
                 Debug.LogError($"Something went wrong:{param}");
             }
 
-            MethodBase method = MethodBase.GetCurrentMethod();
-            string className = method.DeclaringType.Name;
-            Debug.Log($"{className}.{method.Name}");
 
             gridManager.HideAllVisuals();
 
-            foreach (TowerMono tower in towers)
+            foreach (GridCell cell in gridCells)
             {
-                tower.Cell.Unselect();
+                cell.Unselect();
             }
         }
-\
+
         public override void OnExit()
         {
-            MethodBase method = MethodBase.GetCurrentMethod();
-            string className = method.DeclaringType.Name;
-            Debug.Log($"{className}.{method.Name}");
         }
 
         private void SelectedCellsChangedEvent(IReadOnlyCollection<GridCell> cells)
@@ -62,7 +61,21 @@ namespace _src.Towers.TowerSelection
             }
 
             GridCell selectedCell = cells.First();
-            
+            foreach (GridCell cell in gridCells)
+            {
+                cell.Hide();
+
+                if (cell != selectedCell)
+                {
+                    Transform stoneObject = Object.Instantiate(
+                        stonePrefab,
+                        cell.Position.ToWorldPosition(sharedData.grid.cellSize),
+                        Quaternion.identity);
+                    cell.Tower.ChangeTower(stoneObject);
+                }
+            }
+
+            //selectedCell.Tower.ChangeTower(stonePrefab);
         }
     }
 }

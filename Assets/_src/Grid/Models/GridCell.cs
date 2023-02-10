@@ -1,5 +1,5 @@
 ﻿using _src.Grid.Visual;
-using _src.Towers.Stone;
+using _src.Towers;
 
 namespace _src.Grid.Models
 {
