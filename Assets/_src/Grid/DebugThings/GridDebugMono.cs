@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using _src.Grid.Models;
+using TMPro;
 using UnityEngine;
 
 namespace _src.Grid.DebugThings

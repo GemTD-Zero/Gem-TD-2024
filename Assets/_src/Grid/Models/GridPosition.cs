@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace _src.Grid
+namespace _src.Grid.Models
 {
     public readonly struct GridPosition : IEquatable<GridPosition>
     {

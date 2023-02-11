@@ -1,4 +1,6 @@
-﻿using JetBrains.Annotations;
+﻿using _src.Extensions;
+using _src.Grid.Models;
+using JetBrains.Annotations;
 using ObservableCollections;
 using UnityEngine;
 
@@ -8,6 +10,7 @@ namespace _src.Grid.GridManager
     public class GridManagerService
     {
         private readonly GridManagerMono mono;
+        private readonly ObservableList<GridCell> selectedCells;
         private readonly SharedDataMono sharedData;
         private GridCell currentHoveredCell;
 
@@ -17,7 +20,11 @@ namespace _src.Grid.GridManager
         {
             this.mono = mono;
             this.sharedData = sharedData;
-            mono.selectedCells = new ObservableList<GridCell>();
+            selectedCells = new ObservableList<GridCell>();
+            selectedCells.CollectionChanged += delegate
+            {
+                mono.SelectedCellsChangedEvent.Invoke(selectedCells);
+            };
         }
 
         public void OnClicked(Vector3 mousePosition)
@@ -31,12 +38,12 @@ namespace _src.Grid.GridManager
 
             if (cell.Status == CellStatus.Selected)
             {
-                mono.selectedCells.Remove(cell);
+                selectedCells.Remove(cell);
                 cell.Unselect();
             }
             else if (cell.Status is CellStatus.MouseHover or CellStatus.Normal)
             {
-                mono.selectedCells.Add(cell);
+                selectedCells.Add(cell);
                 cell.Select();
             }
         }

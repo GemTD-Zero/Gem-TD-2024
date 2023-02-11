@@ -2,6 +2,7 @@
 using _src.Game;
 using _src.Grid.GridManager;
 using _src.Player;
+using _src.Towers.TowerSelection;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -21,24 +22,36 @@ namespace _src
             RegisterMessagePipes(builder);
         }
 
-        private static void RegisterMessagePipes(IContainerBuilder o) { }
-
-        private static void RegisterServices(IContainerBuilder o)
+        private static void RegisterMessagePipes(IContainerBuilder builder)
         {
-            o.Register<GridManagerService>(Lifetime.Singleton);
+            // MessagePipeOptions options = builder.RegisterMessagePipe(
+            //     o =>
+            //     {
+            //         o.InstanceLifetime = InstanceLifetime.Singleton;
+            //     });
+            // builder.RegisterBuildCallback(o => GlobalMessagePipe.SetProvider(o.AsServiceProvider()));
+            // builder.RegisterMessageBroker<List<GridCell>>(options);
         }
 
-        private void RegisterMonos(ComponentsBuilder o)
+        private static void RegisterServices(IContainerBuilder builder)
         {
-            o.AddInstance(monos.sharedData);
-            o.AddInstance(monos.gameManager);
-            o.AddInstance(monos.gridManager);
-            o.AddInstance(monos.mouseManager);
+            builder.Register<GridManagerService>(Lifetime.Singleton);
+            builder.Register<TowerSelectionService>(Lifetime.Singleton);
+        }
+
+        private void RegisterMonos(ComponentsBuilder builder)
+        {
+            builder.AddInstance(monos.sharedData);
+            builder.AddInstance(monos.gameManager);
+            builder.AddInstance(monos.gridManager);
+            builder.AddInstance(monos.mouseManager);
+            builder.AddInstance(monos.towerSelection);
         }
 
         private static void RegisterPresenters(EntryPointsBuilder o)
         {
             o.Add<GridManagerPresenter>();
+            o.Add<TowerSelectionPresenter>();
         }
 
         [Serializable]
@@ -48,6 +61,7 @@ namespace _src
             public GridManagerMono gridManager;
             public MouseManagerMono mouseManager;
             public SharedDataMono sharedData;
+            public TowerSelectionMono towerSelection;
         }
     }
 }

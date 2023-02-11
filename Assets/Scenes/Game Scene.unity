@@ -466,8 +466,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 274675808}
-  m_LocalRotation: {x: 0.5257311, y: 0.00000002195493, z: -0.000000013568893, w: 0.85065085}
-  m_LocalPosition: {x: 12, y: 8.25, z: 0.25}
+  m_LocalRotation: {x: 0.50059456, y: 0.000000021065022, z: -0.000000012181192, w: 0.8656819}
+  m_LocalPosition: {x: 12, y: 6.937788, z: 0.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -504,6 +504,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
+    FocusDistance: 10
     m_SensorSize: {x: 1, y: 1}
   m_Transitions:
     m_BlendHint: 0
@@ -1230,7 +1231,7 @@ Transform:
   - {fileID: 274675809}
   - {fileID: 900343415}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &718481165
 GameObject:
@@ -1346,7 +1347,7 @@ Transform:
   - {fileID: 1301298346}
   - {fileID: 625572670}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &780302054
 MonoBehaviour:
@@ -1369,6 +1370,7 @@ MonoBehaviour:
     gridManager: {fileID: 1828232117}
     mouseManager: {fileID: 1151510585}
     sharedData: {fileID: 808208089}
+    towerSelection: {fileID: 1038420406}
 --- !u!1 &808208088
 GameObject:
   m_ObjectHideFlags: 0
@@ -1519,6 +1521,50 @@ MonoBehaviour:
   data:
     gridManager: {fileID: 1828232117}
     sharedData: {fileID: 808208089}
+--- !u!1 &1038420404
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1038420405}
+  - component: {fileID: 1038420406}
+  m_Layer: 0
+  m_Name: Tower Selection
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1038420405
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1038420404}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1301298346}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1038420406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1038420404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d07609a18994cccabe1125be808c623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1138200606
 GameObject:
   m_ObjectHideFlags: 0
@@ -1938,7 +1984,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1038420405}
   m_Father: {fileID: 780302053}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2108,7 +2155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 0, y: 10, z: -5}
+  m_FollowOffset: {x: 0, y: 8.687788, z: -5}
   m_XDamping: 0
   m_YDamping: 0
   m_ZDamping: 0
@@ -2415,9 +2462,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towerPlacer: {fileID: 1301298347}
+  towerSelection: {fileID: 1038420406}
   skillBarManager: {fileID: 1190943984}
   gridManager: {fileID: 1828232117}
   sharedData: {fileID: 808208089}
+  stonePrefab: {fileID: 9166716748698141186, guid: c2b3c5d0a3777784583210c093688aea,
+    type: 3}
 --- !u!1 &1724698464
 GameObject:
   m_ObjectHideFlags: 0
@@ -2735,8 +2785,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1955717056}
-  m_LocalRotation: {x: 0.5257311, y: 0.00000002195493, z: -0.000000013568893, w: 0.85065085}
-  m_LocalPosition: {x: 12, y: 8.25, z: 0.25}
+  m_LocalRotation: {x: 0.50059456, y: 0.000000021065022, z: -0.000000012181192, w: 0.8656819}
+  m_LocalPosition: {x: 12, y: 6.937788, z: 0.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3070,7 +3120,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2069522044}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 265.1875, y: 149.25, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

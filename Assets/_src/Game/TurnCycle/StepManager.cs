@@ -10,9 +10,11 @@ namespace _src.Game.TurnCycle
     public class StepManagerMono : MonoBehaviour
     {
         public TowerPlacerMono towerPlacer;
+        public TowerSelectionMono towerSelection;
         public SkillBarManagerMono skillBarManager;
         public GridManagerMono gridManager;
         public SharedDataMono sharedData;
+        public Transform stonePrefab;
 
         private BaseStep currentNode;
 
@@ -23,7 +25,7 @@ namespace _src.Game.TurnCycle
                 skillBarManager.skillBar.firstSkill,
                 gridManager,
                 sharedData);
-            var stoneSelectingStep = new TowerSelectingStep();
+            var stoneSelectingStep = new TowerSelectingStep(gridManager, stonePrefab, sharedData);
             var spawnStep = new SpawnStep();
 
             stonePlacing.SetNext(stoneSelectingStep);
