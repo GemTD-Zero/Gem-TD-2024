@@ -12,8 +12,7 @@ namespace _src.Grid
         private readonly GridData data;
         private readonly Transform gridParent;
         private readonly Transform gridVisualPrefab;
-
-
+        
         public GridGenerator(
             GridData data,
             Transform gridVisualPrefab,
