@@ -2,6 +2,7 @@
 
 namespace _src.Grid.Models
 {
+    [Serializable]
     public readonly struct GridPosition : IEquatable<GridPosition>
     {
         public GridPosition(int x, int z)
