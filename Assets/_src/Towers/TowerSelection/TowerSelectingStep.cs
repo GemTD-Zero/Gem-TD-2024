@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using _src.Extensions;
 using _src.Game.TurnCycle.TurnSteps;
 using _src.Grid.GridManager;
@@ -74,8 +73,8 @@ namespace _src.Towers.TowerSelection
                     cell.Tower.ChangeTower(stoneObject);
                 }
             }
-
-            //selectedCell.Tower.ChangeTower(stonePrefab);
+            
+            Exit();
         }
     }
 }

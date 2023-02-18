@@ -1,4 +1,5 @@
-﻿using _src.Game.TurnCycle.TurnSteps;
+﻿using _src.Enemy;
+using _src.Game.TurnCycle.TurnSteps;
 using _src.Grid.GridManager;
 using _src.Skill;
 using _src.Towers.TowerPlacement;
@@ -15,6 +16,7 @@ namespace _src.Game.TurnCycle
         public GridManagerMono gridManager;
         public SharedDataMono sharedData;
         public Transform stonePrefab;
+        public EnemySpawnerMono enemySpawner;
 
         private BaseStep currentNode;
 
@@ -26,7 +28,7 @@ namespace _src.Game.TurnCycle
                 gridManager,
                 sharedData);
             var stoneSelectingStep = new TowerSelectingStep(gridManager, stonePrefab, sharedData);
-            var spawnStep = new SpawnStep();
+            var spawnStep = new SpawnStep(sharedData, enemySpawner);
 
             stonePlacing.SetNext(stoneSelectingStep);
             stoneSelectingStep.SetNext(spawnStep);

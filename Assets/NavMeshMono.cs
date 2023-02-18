@@ -13,7 +13,6 @@ public class NavMeshMono : MonoBehaviour
     {
         mainCamera = Camera.main;
         surface = GetComponent<NavMeshSurface>();
-        
     }
 
     private void Update()
@@ -22,8 +21,7 @@ public class NavMeshMono : MonoBehaviour
         {
             return;
         }
-
-
+        
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         if (!Physics.Raycast(ray, out RaycastHit hit))
         {

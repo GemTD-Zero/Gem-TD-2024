@@ -58,7 +58,6 @@ namespace _src.Towers.TowerPlacement
             }
         }
 
-
         public Action EnableTowerHower(Action<GridPosition> onTowerPlaceSuccess, Action onTowerPlaceCancel)
         {
             shouldHowerOver = true;

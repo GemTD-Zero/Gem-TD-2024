@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using _src.Extensions;
 using _src.Game.TurnCycle.TurnSteps;
 using _src.Grid.GridManager;
@@ -44,19 +43,18 @@ namespace _src.Towers.TowerPlacement
 
         public override void OnExit()
         {
+            Debug.Log("Step.Tower.Place.Exited");
         }
 
         private void OnButtonClick()
         {
             if (isPressed is false)
             {
-                //skill.Disable();
                 isPressed = true;
                 cancelPlacing = towerPlacer.EnableTowerHower(OnTowerPlaceSuccess, OnTowerPlaceCancel);
             }
             else
             {
-                //skill.Activate();
                 isPressed = false;
             }
         }
