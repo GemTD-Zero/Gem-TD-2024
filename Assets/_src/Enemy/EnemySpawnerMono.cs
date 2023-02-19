@@ -28,23 +28,42 @@ namespace _src.Enemy
 
         public void SpawnEnemies(Transform prefab, int count)
         {
+            if (prefab == null)
+            {
+                Debug.LogError("prefab is null #1");
+            }
+            
             StartCoroutine(SpawnEnemiesRoutine(prefab, count));
         }
 
         private IEnumerator SpawnEnemiesRoutine(Transform prefab, int count)
         {
-            for (var i = 0; i < count; i++)
+            if (prefab == null)
             {
-                EnemyAgentMono enemy = SpawnEnemyAndSetDestionation(prefab);
-                agents.Add(enemy);
-                yield return new WaitForSeconds(spawnInterval);
+                Debug.LogError("prefab is null #3");
+            }
+
+            while (true)
+            {
+                for (var i = 0; i < count; i++)
+                {
+                    EnemyAgentMono enemy = SpawnEnemyAndSetDestionation(prefab);
+                    agents.Add(enemy);
+                    yield return new WaitForSeconds(spawnInterval);
+                }
+                yield break;
             }
         }
 
         private EnemyAgentMono SpawnEnemyAndSetDestionation(Transform prefab)
         {
+            if (prefab == null)
+            {
+                Debug.LogError("prefab is null #4");
+            }
+            
             Transform enemyObject = Instantiate(prefab, transform);
-            var enemy = enemyObject.gameObject.AddComponent<EnemyAgentMono>();
+            var enemy = enemyObject.gameObject.GetComponent<EnemyAgentMono>();
             enemy.SetDestinations(destinations);
             return enemy;
         }

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1347854380085127065}
   - component: {fileID: 6884446434294727841}
+  - component: {fileID: 3184070680979807552}
   m_Layer: 0
   m_Name: Enemy.Wave.1 Prefab.Test
   m_TagString: Untagged
@@ -55,6 +56,18 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 0
+--- !u!114 &3184070680979807552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2214733874473218077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44dbf0f4ca7c737459edc8c0dbe7d29b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2425220307266392565
 GameObject:
   m_ObjectHideFlags: 0
@@ -117,7 +130,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 66dab13b64233044c90798125fbb5184, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

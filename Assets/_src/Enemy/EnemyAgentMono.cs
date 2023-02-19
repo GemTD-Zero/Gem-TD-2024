@@ -9,7 +9,7 @@ namespace _src.Enemy
     {
         private NavMeshAgent agent;
         private Vector3[] destinations;
-        private int destionationIndex;
+        private int destinationIndex;
 
         public void SetDestinations(Vector3[] enemyDestionations)
         {
@@ -18,9 +18,13 @@ namespace _src.Enemy
             SetNextDestionation();
         }
 
-        private void Start()
+        private void Awake()
         {
             agent = GetComponent<NavMeshAgent>();
+            if (agent == null)
+            {
+                Debug.Log($"agent is null");
+            }
         }
 
         private void Update()
@@ -33,25 +37,31 @@ namespace _src.Enemy
             SetNextDestionation();
         }
 
-        private void OnDrawGizmosSelected()
-        {
-            if (!agent.hasPath)
-            {
-                return;
-            }
-
-            Gizmos.color = Color.red;
-            Gizmos.DrawLineList(agent.path.corners);
-        }
+        // private void OnDrawGizmosSelected()
+        // {
+        //     if (!agent.hasPath)
+        //     {
+        //         return;
+        //     }
+        //
+        //     Gizmos.color = Color.red;
+        //     Gizmos.DrawLineList(agent.path.corners);
+        // }
 
         private void SetNextDestionation()
         {
-            if (destionationIndex >= destinations.Length)
+            if (destinationIndex >= destinations.Length)
             {
                 return;
+                
             }
-            
-            agent.SetDestination(destinations[destionationIndex++]);
+            Debug.Log($"Destination Index:{destinationIndex}");
+            Vector3 destination = destinations[destinationIndex++];
+            if (agent == null)
+            {
+                Debug.Log($"agent is null. destionation:{destination}");
+            }
+            agent.SetDestination(destination);
         }
     }
 }
