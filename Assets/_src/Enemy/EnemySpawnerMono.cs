@@ -9,7 +9,7 @@ namespace _src.Enemy
         [SerializeField]
         private SharedDataMono sharedData;
 
-        private readonly float spawnInterval = 0.1f;
+        private readonly float spawnInterval = 0.5f;
 
         private List<EnemyAgentMono> agents;
         private Vector3[] destinations;
@@ -28,40 +28,22 @@ namespace _src.Enemy
 
         public void SpawnEnemies(Transform prefab, int count)
         {
-            if (prefab == null)
-            {
-                Debug.LogError("prefab is null #1");
-            }
-            
             StartCoroutine(SpawnEnemiesRoutine(prefab, count));
         }
 
         private IEnumerator SpawnEnemiesRoutine(Transform prefab, int count)
         {
-            if (prefab == null)
-            {
-                Debug.LogError("prefab is null #3");
-            }
 
-            while (true)
+            for (var i = 0; i < count; i++)
             {
-                for (var i = 0; i < count; i++)
-                {
-                    EnemyAgentMono enemy = SpawnEnemyAndSetDestionation(prefab);
-                    agents.Add(enemy);
-                    yield return new WaitForSeconds(spawnInterval);
-                }
-                yield break;
+                EnemyAgentMono enemy = SpawnEnemyAndSetDestionation(prefab);
+                agents.Add(enemy);
+                yield return new WaitForSeconds(spawnInterval);
             }
         }
 
         private EnemyAgentMono SpawnEnemyAndSetDestionation(Transform prefab)
         {
-            if (prefab == null)
-            {
-                Debug.LogError("prefab is null #4");
-            }
-            
             Transform enemyObject = Instantiate(prefab, transform);
             var enemy = enemyObject.gameObject.GetComponent<EnemyAgentMono>();
             enemy.SetDestinations(destinations);

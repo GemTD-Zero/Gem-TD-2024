@@ -37,17 +37,6 @@ namespace _src.Enemy
             SetNextDestionation();
         }
 
-        // private void OnDrawGizmosSelected()
-        // {
-        //     if (!agent.hasPath)
-        //     {
-        //         return;
-        //     }
-        //
-        //     Gizmos.color = Color.red;
-        //     Gizmos.DrawLineList(agent.path.corners);
-        // }
-
         private void SetNextDestionation()
         {
             if (destinationIndex >= destinations.Length)
