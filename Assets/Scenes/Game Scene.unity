@@ -4764,7 +4764,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d517993d3fa8a94386fc07c954cbe0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCamera: {fileID: 0}
 --- !u!1 &789919232
 GameObject:
   m_ObjectHideFlags: 0
@@ -6690,7 +6689,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1174972675
 Transform:
   m_ObjectHideFlags: 0
